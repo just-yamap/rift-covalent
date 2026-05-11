@@ -4,7 +4,7 @@
 
 | Component | State | Evidence |
 |---|---|---|
-| Module deployed | ✅ | `backend/integrations/covalent.js` — 255 LOC |
+| Module deployed | ✅ | `backend/integrations/covalent.js` - 255 LOC |
 | API key configured | ✅ | `COVALENT_API_KEY` set in production .env (active) |
 | Chain endpoint | ✅ | `solana-mainnet` (Covalent chain identifier) |
 | BUY-flow integration | ✅ | atm-connector.js line 869-878 (step 0c, before lock_buy_claim) |
@@ -23,7 +23,7 @@ Every BUY and SELL transaction in production logs a risk score line. Sample from
 
 This is the canonical evidence: the integration is invoked on **every** real BUY in production, the API call succeeds, the score is computed from live Covalent GoldRush data, and the result is logged with the contributing drivers.
 
-Drivers are human-readable strings — e.g. `"3 drainer approvals outstanding"`, `"interacted with mixer Elusiv"`, `"wallet age 2 days"` — so a compliance officer can audit refusals.
+Drivers are human-readable strings - e.g. `"3 drainer approvals outstanding"`, `"interacted with mixer Elusiv"`, `"wallet age 2 days"` - so a compliance officer can audit refusals.
 
 ## Two distinct refusal paths
 
@@ -31,7 +31,7 @@ The integration distinguishes two refusal codes so the kiosk UI can respond appr
 
 | Code | HTTP | When | Customer recovery |
 |---|---|---|---|
-| `SANCTIONS_HIT` | 403 | `sanctionsHit: true` (any sanctions list match) | None — terminal refusal, escalate to compliance |
+| `SANCTIONS_HIT` | 403 | `sanctionsHit: true` (any sanctions list match) | None - terminal refusal, escalate to compliance |
 | `RISK_KYC_REQUIRED` | 422 | Score exceeds operator threshold | Retry with a different wallet, or escalate to KYC |
 
 The split matters because they're different regulatory situations. A sanctions hit is a hard legal stop; a high score is a soft policy decision that some operators may resolve with KYC.
@@ -48,7 +48,7 @@ This trace proves two things:
 
 1. **Covalent is invoked on every real BUY in production.** It's the first compliance gate, not stubbed or gated behind a flag the demo would skip. The customer received 5.50 USDC on-chain only after Covalent green-lit the destination wallet.
 
-2. **The integration is positioned correctly in the flow.** Risk scoring runs BEFORE `lock_buy_claim` — meaning before any on-chain commitment or fund movement. If the score had been bad, no on-chain state would have been created and no SOL would have been spent on fees.
+2. **The integration is positioned correctly in the flow.** Risk scoring runs BEFORE `lock_buy_claim` - meaning before any on-chain commitment or fund movement. If the score had been bad, no on-chain state would have been created and no SOL would have been spent on fees.
 
 ## On-chain transaction (corresponding to the trace above)
 
@@ -65,12 +65,12 @@ The integration runs inside the same atm-connector backend that powers the live 
 
 | Service | Port | Role |
 |---|---|---|
-| `atm-connector.js` (Node) | 8790 | Core BUY/SELL orchestrator — hosts the Covalent integration |
+| `atm-connector.js` (Node) | 8790 | Core BUY/SELL orchestrator - hosts the Covalent integration |
 | `server.py` (Flask) | 5000 | Admin console + customer-facing kiosk API |
 | `printer-bridge.js` (Node/WS) | 8766 | ESC/POS thermal receipt printer |
 | `nv200-ws.py` (Python/WS) | 8765 | ITL NV200 banknote validator |
 
-A customer interacting with the kiosk → ATM checks Covalent → if clean, proceeds with the on-chain BUY/SELL — all executed against Solana mainnet.
+A customer interacting with the kiosk → ATM checks Covalent → if clean, proceeds with the on-chain BUY/SELL - all executed against Solana mainnet.
 
 ## Why this matters for a real ATM
 
@@ -97,4 +97,4 @@ Publishing all of that would expose security-sensitive infrastructure unrelated 
 
 ## License
 
-MIT — Yann Mapouka <yamap@riftatm.com>
+MIT License
