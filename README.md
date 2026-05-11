@@ -30,6 +30,7 @@ The composite score is 0-100, higher = worse. The operator sets a `maxRiskScore`
 | Sanctions list match | **100** | Sanctioned address - veto regardless of other scores |
 
 ## Architecture
+```
 ┌────────────────────────────────────────┐
 │ Customer interacts with kiosk          │
 │ (BUY: enters destination address       │
@@ -61,16 +62,19 @@ The composite score is 0-100, higher = worse. The operator sets a `maxRiskScore`
 │ score >= threshold OR sanctioned        │
 │   → kiosk refuses, explains in UI       │
 └─────────────────────────────────────────┘
+```
 
 If Covalent is unreachable or returns an error, the integration returns `score: 100` (fail-closed) and the transaction is refused. This is intentional: a fiat-to-crypto operator's regulatory exposure is asymmetric - false-positive refusals are recoverable (customer retries with a different wallet), false-negative approvals are not.
 
 ## Repository layout
+```
 rift-covalent/
 ├── integration/
 │   └── covalent.js         Production module (255 LOC)
 ├── README.md                This file
 ├── WIRING.md                Integration points in atm-connector.js
 └── PROOFS.md                Live production evidence
+```
 
 ## Module API
 
