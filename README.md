@@ -2,7 +2,7 @@
 
 Wallet risk scoring integrated into the live RIFT fiat-to-crypto ATM on Solana mainnet, using Covalent's GoldRush API for real-time AML / compliance gating on both BUY and SELL flows.
 
-**Frontier 2026 - Covalent GoldRush Track ($3K USDC + $3.5K credits).**
+
 
 ---
 
